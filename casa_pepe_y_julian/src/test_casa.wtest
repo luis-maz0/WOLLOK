@@ -1,0 +1,26 @@
+import Casa.*
+import Cuentas.*
+
+describe "test_casa_sin_cuenta_bancaria" {
+	
+	test "Hay suficientes viveres"{	
+		assert.that(casa.hay_viveres_suficientes())
+	}
+	
+	test "Hay que hacer reparaciones"{
+		casa.romper(1000)
+		assert.that(casa.hacer_reparaciones())
+		assert.equals(casa.get_costo_reparaciones(),1000)
+	}
+	
+	test "la casa NO está en orden"{
+		casa.romper(1000)
+		assert.notThat(casa.casa_en_orden())
+	}
+	test "seleccionar cuenta y generar un gasto"{
+		casa.set_cuenta_gestion_gastos(cuenta_corriente)
+		casa.gastar(200)
+		assert.equals(cuenta_corriente.get_saldo(),300)
+	}
+	
+}
